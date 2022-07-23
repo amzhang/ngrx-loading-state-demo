@@ -1,0 +1,50 @@
+<p><strong>UserId:</strong> {{ userId$ | async }}</p>
+<div>
+  <p><strong>Loading state:</strong></p>
+  <table>
+    <tr>
+      <td>loading:</td>
+      <td>{{ (fetchUserState$ | async)?.loading }}</td>
+    </tr>
+    <tr>
+      <td>success:</td>
+      <td>{{ (fetchUserState$ | async)?.success }}</td>
+    </tr>
+    <tr>
+      <td>successTimestamp:</td>
+      <td>{{ (fetchUserState$ | async)?.successTimestamp }}</td>
+    </tr>
+    <tr>
+      <td>error:</td>
+      <td>{{ (fetchUserState$ | async)?.error }}</td>
+    </tr>
+  </table>
+
+  <p>API calls simulated to take 5 seconds</p>
+  <br />
+  <br />
+  <button (click)="onReload()">Reload</button>
+  <p>
+    When maxAge is not specified, an API call is always issued, even if an
+    existing API call is already in progress.
+  </p>
+
+  <br />
+  <br />
+  <br />
+  <button (click)="onReloadLatest()">Reload Latest</button>
+  <p>
+    When maxAge is set to MAX_AGE_LATEST then a new API call is issued if there
+    is no API call already in progress.
+  </p>
+
+  <br />
+  <br />
+  <br />
+  <button (click)="onReloadMaxAge()">Reload maxAge 5000</button>
+  <p>
+    If the previous successTimestamp is older than 5000ms, then a new API call
+    is issued. Otherwise, this action is ignored since we consider the data from
+    the last successful load aciton to be fresh.
+  </p>
+</div>
