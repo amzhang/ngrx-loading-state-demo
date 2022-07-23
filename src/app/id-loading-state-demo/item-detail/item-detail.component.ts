@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IdLoadingState, MAX_AGE_LATEST } from 'ngrx-loading-state';
 import { Observable } from 'rxjs';
-import { Item } from 'src/app/data-access/simple.reducer';
 import { SimpleFacade } from '../../data-access/simple.facade';
+import { Item } from '../../data-access/simple.reducer';
 
 @Component({
   selector: 'item-detail[itemId]',
