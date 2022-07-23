@@ -1,50 +1,75 @@
-<p><strong>UserId:</strong> {{ userId$ | async }}</p>
-<div>
-  <p><strong>Loading state:</strong></p>
-  <table>
-    <tr>
-      <td>loading:</td>
-      <td>{{ (fetchUserState$ | async)?.loading }}</td>
-    </tr>
-    <tr>
-      <td>success:</td>
-      <td>{{ (fetchUserState$ | async)?.success }}</td>
-    </tr>
-    <tr>
-      <td>successTimestamp:</td>
-      <td>{{ (fetchUserState$ | async)?.successTimestamp }}</td>
-    </tr>
-    <tr>
-      <td>error:</td>
-      <td>{{ (fetchUserState$ | async)?.error }}</td>
-    </tr>
-  </table>
+<h3>Data selectors</h3>
+<mat-list>
+  <mat-list-item><div class="header">UserId:</div> <div class="value">{{ userId$ | async  }}</div></mat-list-item>
+</mat-list>
+<br />
+<br />
 
-  <p>API calls simulated to take 5 seconds</p>
-  <br />
-  <br />
-  <button (click)="onReload()">Reload</button>
-  <p>
-    When maxAge is not specified, an API call is always issued, even if an
-    existing API call is already in progress.
-  </p>
+<h3>Loading state selectors</h3>
 
-  <br />
-  <br />
-  <br />
-  <button (click)="onReloadLatest()">Reload Latest</button>
-  <p>
-    When maxAge is set to MAX_AGE_LATEST then a new API call is issued if there
-    is no API call already in progress.
-  </p>
+<mat-list>
+  <mat-list-item><div class="header">loading:</div>
+    <div class="value">
+      {{ (fetchUserState$ | async)?.loading }}
+      <div *ngIf="(fetchUserState$ | async)?.loading" class="spinner">
+        <mat-spinner [diameter]="15"></mat-spinner>
+      </div>
+    </div>
+  </mat-list-item>
+  <mat-list-item><div class="header">success:</div> <div class="value">{{ (fetchUserState$ | async)?.success }}</div></mat-list-item>
+  <mat-list-item><div class="header">successTimestamp:</div> <div class="value">{{ (fetchUserState$ | async)?.successTimestamp }}</div></mat-list-item>
+  <mat-list-item><div class="header">error:</div> <div class="value">{{ (fetchUserState$ | async)?.error }}</div></mat-list-item>
+</mat-list>
 
-  <br />
-  <br />
-  <br />
-  <button (click)="onReloadMaxAge()">Reload maxAge 5000</button>
-  <p>
-    If the previous successTimestamp is older than 5000ms, then a new API call
-    is issued. Otherwise, this action is ignored since we consider the data from
-    the last successful load aciton to be fresh.
-  </p>
-</div>
+
+<p>API calls simulated to take 5 seconds</p>
+
+<table>
+  <tr>
+    <td>
+      <button mat-stroked-button color="primary" class="reload" (click)="onReload()">Reload</button>
+    </td>
+    <td>
+      <p>
+        When maxAge is not specified, an API call is always issued, even if an
+        existing API call is already in progress.  
+      </p>
+   </td>
+  </tr>
+
+  <tr>
+    <td>
+      <button mat-stroked-button color="primary" class="reload" (click)="onReloadLatest()">Reload Latest</button>
+    </td>
+    <td>
+      <p>
+        When maxAge is set to MAX_AGE_LATEST then a new API call is issued if there
+        is no API call already in progress.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <button mat-stroked-button color="primary" class="reload" (click)="onReloadMaxAge()">Reload maxAge 5000</button>
+    </td>
+    <td>
+      <p>
+        If the previous successTimestamp is older than 5000ms, then a new API call
+        is issued. Otherwise, this action is ignored since we consider the data from
+        the last successful load action to be fresh.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <button mat-stroked-button color="primary" class="reload" (click)="onReloadForceError()">Reload now and force error</button>
+    </td>
+    <td>
+      <p>
+        Reloading immediately and forcing an error to occur.
+      </p>
+    </td>
+  </tr>
+</table>

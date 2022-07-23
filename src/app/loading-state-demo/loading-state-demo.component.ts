@@ -27,4 +27,8 @@ export class LoadingStateDemoComponent {
   onReloadMaxAge(): void {
     this.simpleFacade.fetchUser({ maxAge: 5000 });
   }
+
+  onReloadForceError(): void {
+    this.simpleFacade.fetchUser({ forceFailure: true });
+  }
 }
