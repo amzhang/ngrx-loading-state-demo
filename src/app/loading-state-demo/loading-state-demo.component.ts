@@ -31,4 +31,8 @@ export class LoadingStateDemoComponent {
   onReloadForceError(): void {
     this.simpleFacade.fetchUser({ forceFailure: true });
   }
+
+  onReloadForceLocalError(): void {
+    this.simpleFacade.fetchUser({ forceFailure: true, localError: true });
+  }
 }

@@ -24,7 +24,7 @@
     "@ngrx/entity": "~13.2.0",
     "@ngrx/store": "~13.2.0",
     "@ngrx/store-devtools": "^13.2.0",
-    "ngrx-loading-state": "~1.0.5",
+    "ngrx-loading-state": "~1.0.8",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

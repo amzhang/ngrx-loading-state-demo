@@ -22,7 +22,7 @@
 </mat-list>
 
 
-<p>API calls simulated to take 5 seconds</p>
+<p>API calls simulated to take 3 seconds</p>
 
 <table>`  
   <tr>
@@ -69,6 +69,17 @@
     <td>
       <p>
         Reloading immediately and forcing an error to occur.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <button mat-stroked-button color="primary" class="reload" (click)="onReloadForceLocalError()">Reload now and force local error</button>
+    </td>
+    <td>
+      <p>
+        Reloading immediately, forcing an error, handle locally. i.e. without showing the global error snackbar.
       </p>
     </td>
   </tr>

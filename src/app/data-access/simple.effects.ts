@@ -24,7 +24,7 @@ export class SimpleEffects {
         const user = `fetched from API call number ${SimpleEffects.userApiCalls}`;
 
         return of(true).pipe(
-          delay(5000),
+          delay(3000),
           map(() => {
             if (action.forceFailure) {
               throw new Error('Forced failure');

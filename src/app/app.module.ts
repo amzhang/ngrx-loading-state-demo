@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, USER_PROVIDED_META_REDUCERS } from '@ngrx/store';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { globalFailureReducerFactory } from 'ngrx-loading-state';
 import { AppComponent } from './app.component';
 import { SimpleStoreModule } from './data-access/simple-store.module';
+import { GlobalErrorHandler } from './error-handlers/global-error-handler';
+import { globalFailureHandler } from './error-handlers/global-failure-handler';
 import { IdLoadingStateDemoModule } from './id-loading-state-demo/id-loading-state-demo.module';
 import { LoadingStateDemoModule } from './loading-state-demo/loading-state-demo.module';
 
@@ -29,9 +33,16 @@ import { LoadingStateDemoModule } from './loading-state-demo/loading-state-demo.
     LoadingStateDemoModule,
     IdLoadingStateDemoModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: USER_PROVIDED_META_REDUCERS,
+      useValue: [globalFailureReducerFactory(globalFailureHandler)]
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
