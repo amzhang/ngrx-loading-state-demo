@@ -7,24 +7,24 @@
 
 <h3>Loading state selectors</h3>
 
-<mat-list>
+<mat-list *ngIf="fetchUserState$ | async as fetchUserState">
   <mat-list-item><div class="header">loading:</div>
     <div class="value">
-      {{ (fetchUserState$ | async)?.loading }}
-      <div *ngIf="(fetchUserState$ | async)?.loading" class="spinner">
+      {{ fetchUserState.loading }}
+      <div *ngIf="fetchUserState.loading" class="spinner">
         <mat-spinner [diameter]="15"></mat-spinner>
       </div>
     </div>
   </mat-list-item>
-  <mat-list-item><div class="header">success:</div> <div class="value">{{ (fetchUserState$ | async)?.success }}</div></mat-list-item>
-  <mat-list-item><div class="header">successTimestamp:</div> <div class="value">{{ (fetchUserState$ | async)?.successTimestamp }}</div></mat-list-item>
-  <mat-list-item><div class="header">error:</div> <div class="value">{{ (fetchUserState$ | async)?.error }}</div></mat-list-item>
+  <mat-list-item><div class="header">success:</div> <div class="value">{{ fetchUserState.success }}</div></mat-list-item>
+  <mat-list-item><div class="header">successTimestamp:</div> <div class="value">{{ fetchUserState.successTimestamp }}</div></mat-list-item>
+  <mat-list-item><div class="header">error:</div> <div class="value">{{ fetchUserState.error }}</div></mat-list-item>
 </mat-list>
 
 
 <p>API calls simulated to take 5 seconds</p>
 
-<table>
+<table>`  
   <tr>
     <td>
       <button mat-stroked-button color="primary" class="reload" (click)="onReload()">Reload</button>
