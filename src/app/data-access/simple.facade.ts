@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoadAction, LoadingState } from 'ngrx-loading-state';
-import { IdLoadAction, IdLoadingState } from 'ngrx-loading-state/lib/id-loading-state/id-loading-state-types';
-import { CombinedLoadingState } from 'ngrx-loading-state/lib/loading-state/loading-state-types';
+import { CombinedLoadingState, IdLoadAction, IdLoadingState, LoadAction, LoadingState } from 'ngrx-loading-state';
 import { Observable } from 'rxjs';
 import { fetchItem, fetchUser } from './simple.actions';
 import { Item } from './simple.reducer';

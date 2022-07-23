@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MAX_AGE_LATEST } from 'ngrx-loading-state';
-import { IdLoadingState } from 'ngrx-loading-state/lib/id-loading-state/id-loading-state-types';
+import { IdLoadingState, MAX_AGE_LATEST } from 'ngrx-loading-state';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/data-access/simple.reducer';
 import { SimpleFacade } from '../../data-access/simple.facade';
