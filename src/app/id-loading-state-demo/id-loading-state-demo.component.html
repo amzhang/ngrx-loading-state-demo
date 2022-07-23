@@ -1,0 +1,11 @@
+<h3>Data selectors</h3>
+
+Global loading indicator: <mat-spinner *ngIf="(combinedState$ | async)?.loading" [diameter]="15" class="combined"></mat-spinner>
+
+<item-detail *ngFor="let itemId of itemIds" [itemId]="itemId"></item-detail>
+
+<p>
+  The same kind of <em>maxAge</em> filtering can be applied to the id based loading states as well.
+  In the above, we use <em>MAX_AGE_LATEST</em> which will issue an API call if there is no
+  API call already in progress. If there is one, it will ignore the new load action.
+</p>

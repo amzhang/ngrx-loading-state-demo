@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filterLoading } from 'ngrx-loading-state';
-import { of, delay } from 'rxjs';
+import { delay, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { fetchUser } from './simple.actions';
-import { fetchUserSelectors } from './simple.selectors';
+import { fetchItem, fetchUser } from './simple.actions';
+import { fetchItemSelectors, fetchUserSelectors } from './simple.selectors';
 
 @Injectable()
 export class SimpleEffects {
-  static apiCalls = 0;
+  static userApiCalls = 0;
+  static itemApiCalls = 0;
 
   constructor(private actions$: Actions, private store: Store) {}
 
@@ -18,7 +19,9 @@ export class SimpleEffects {
       ofType(fetchUser.load),
       filterLoading(this.store.select(fetchUserSelectors.state)),
       switchMap((action) => {
-        SimpleEffects.apiCalls += 1;
+        SimpleEffects.userApiCalls += 1;
+
+        const user = `fetched from API call number ${SimpleEffects.userApiCalls}`;
 
         return of(true).pipe(
           delay(5000),
@@ -27,7 +30,7 @@ export class SimpleEffects {
               throw new Error('Forced failure');
             }
             return fetchUser.success({
-              userId: `fetched from API call number ${SimpleEffects.apiCalls}`,
+              user,
             });
           }),
           fetchUser.catchError()
@@ -36,22 +39,27 @@ export class SimpleEffects {
     );
   });
 
-  // fetchIdCount$ = fetchIdCount.createEffect(this.actions$, (idActions$, id) => {
-  //   return idActions$.pipe(
-  //     filterLoading(this.store.select(fetchIdCountSelectors.state(id))),
-  //     switchMap((action) => {
-  //       SimpleEffects.apiCalls += 1;
-  //       return of(true).pipe(
-  //         delay(1), // Ensure yielding into event loop.
-  //         map(() => {
-  //           if (action.forceFailure) {
-  //             throw new Error('Forced failure');
-  //           }
-  //           return fetchIdCount.idSuccess({ id, count: action.count });
-  //         }),
-  //         fetchIdCount.catchError(id)
-  //       );
-  //     })
-  //   );
-  // });
+  fetchItem$ = fetchItem.createEffect(this.actions$, (idActions$, id) => {
+    return idActions$.pipe(
+      filterLoading(this.store.select(fetchItemSelectors.state(id))),
+      switchMap((action) => {
+        SimpleEffects.itemApiCalls += 1;
+        const content = `item ${id} fetched from API call number  ${SimpleEffects.itemApiCalls}`;
+
+        return of(true).pipe(
+          delay(3000), // Ensure yielding into event loop.
+          map(() => {
+            return fetchItem.idSuccess({
+              id,
+              item: {
+                id,
+                content
+              }
+            });
+          }),
+          fetchItem.catchError(id)
+        );
+      })
+    );
+  });
 }

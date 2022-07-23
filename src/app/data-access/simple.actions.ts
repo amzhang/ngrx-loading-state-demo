@@ -6,19 +6,20 @@ import {
   idLoad,
   idSuccess,
   load,
-  success,
+  success
 } from 'ngrx-loading-state';
+import { Item } from './simple.reducer';
 
 export const fetchUser = createLoadingActions(
   'Fetch User',
   load<{ forceFailure?: boolean }>(),
-  success<{ userId: string }>(),
+  success<{ user: string }>(),
   failure<{}>()
 );
 
-// export const fetchIdCount = createIdLoadingActions(
-//   'Fetch Id Count',
-//   idLoad<{ count: number; forceFailure?: boolean }>(),
-//   idSuccess<{ count: number }>(),
-//   idFailure<{}>()
-// );
+export const fetchItem = createIdLoadingActions(
+  'Fetch Item',
+  idLoad<{}>(),
+  idSuccess<{ item: Item }>(),
+  idFailure<{}>()
+);

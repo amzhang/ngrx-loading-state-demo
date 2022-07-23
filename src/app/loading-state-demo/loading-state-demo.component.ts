@@ -9,15 +9,15 @@ import { SimpleFacade } from '../data-access/simple.facade';
 })
 export class LoadingStateDemoComponent {
   fetchUserState$ = this.simpleFacade.getFetchUserState();
-  userId$ = this.simpleFacade.getUserId();
+  user$ = this.simpleFacade.getUser();
 
   constructor(private simpleFacade: SimpleFacade) {
-    this.simpleFacade.fetchUser();
+    this.simpleFacade.fetchUser({});
     console.log('123');
   }
 
   onReload(): void {
-    this.simpleFacade.fetchUser();
+    this.simpleFacade.fetchUser({});
   }
 
   onReloadLatest(): void {

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="name">
+    Item {{ itemId }}
+  </div>
+  <div class="content">
+    {{ (fetchItemState$ | async)?.successTimestamp ? (item$ | async)?.content : "(not loaded yet)" }}
+  </div>
+  <div class="action">
+    <button mat-stroked-button color="primary" (click)="reload()">{{ (fetchItemState$ | async)?.successTimestamp ? "Reload" : "Load" }}</button>
+    <mat-spinner *ngIf="(fetchItemState$ | async)?.loading" [diameter]="15"></mat-spinner>
+  </div>
+</div>

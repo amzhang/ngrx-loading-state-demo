@@ -1,0 +1,26 @@
+.container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.name {
+  display: inline-block;
+  width: 100px;
+}
+
+.content {
+  display: inline-block;
+  width: 400px;
+}
+
+.action {
+  display: inline-block;
+
+  button {
+    display: inline-block;
+  }
+
+  mat-spinner {
+    display: inline-block;
+  }
+}
